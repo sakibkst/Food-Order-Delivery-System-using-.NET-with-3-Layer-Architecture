@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin: 5px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .h3-st {
+            display: block;
+            width: 1400px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .add-button {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <script>
+        var product = angular.module("productInfo", []);
+        product.controller('productInfoCtrl', function ($scope, $http, $window) {
+            $http.get("https://localhost:44391/api/products").then(function (resp) {
+                console.log(resp.data);
+                $scope.details = resp.data;
+            }, function (err) {
+                console.error(err);
+            });
+
+            $scope.editProduct = function (product) {
+                $window.localStorage.setItem('selectedProduct', JSON.stringify(product));
+                $window.location.href = 'updateProduct.html';
+            };
+
+            $scope.deleteProduct = function (productId) {
+                $window.location.href = 'deleteProduct.html';
+            };
+        });
+    </script>
+</head>
+
+<body ng-app="productInfo">
+    <div ng-controller="productInfoCtrl">
+        <a href="CreateProduct.html" class="add-button">Add New Product</a>
+        <h3 class="h3-st">Product Info</h3>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Restaurant ID</th>
+                    <th>Cuisine ID</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in details">
+                    <td>{{ product.Name }}</td>
+                    <td>{{ product.Price }}</td>
+                    <td>{{ product.Quantity }}</td>
+                    <td>{{ product.Rid }}</td>
+                    <td>{{ product.Cid }}</td>
+                    <td>
+                        <button ng-click="editProduct(product)">Edit</button> |
+                        <button ng-click="deleteProduct(product.Id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

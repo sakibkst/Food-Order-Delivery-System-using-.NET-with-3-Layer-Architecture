@@ -1,0 +1,14 @@
+E:\.net\Day01\al\DAL\bin\Debug\DAL.dll.config
+E:\.net\Day01\al\DAL\bin\Debug\DAL.dll
+E:\.net\Day01\al\DAL\bin\Debug\DAL.pdb
+E:\.net\Day01\al\DAL\bin\Debug\EntityFramework.dll
+E:\.net\Day01\al\DAL\bin\Debug\EntityFramework.SqlServer.dll
+E:\.net\Day01\al\DAL\bin\Debug\EntityFramework.xml
+E:\.net\Day01\al\DAL\bin\Debug\EntityFramework.SqlServer.xml
+E:\.net\Day01\al\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+E:\.net\Day01\al\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+E:\.net\Day01\al\DAL\obj\Debug\DAL.csproj.CopyComplete
+E:\.net\Day01\al\DAL\obj\Debug\DAL.dll
+E:\.net\Day01\al\DAL\obj\Debug\DAL.pdb
+E:\.net\Day01\al\DAL\obj\Debug\DAL.Migrations.InitDb.resources
+E:\.net\Day01\al\DAL\obj\Debug\DAL.csproj.GenerateResource.cache

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Product</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table td {
+            padding: 8px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 16px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: #ff0000;
+        }
+
+        .back-button {
+            display: block;
+            width: 50px;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+
+    <script>
+        var productApp = angular.module("productApp", []);
+        productApp.controller('DeleteProductController', function ($scope, $http) {
+            $scope.productId = '';
+            $scope.errorMessage = '';
+
+            $scope.deleteProduct = function () {
+                $http.delete("https://localhost:44391/api/products/" + $scope.productId)
+                    .then(function (response) {
+                        console.log('Product deleted successfully', response);
+                        alert("Product deleted successfully!");
+                        $scope.errorMessage = '';
+                    })
+                    .catch(function (error) {
+                        console.error("Error deleting product", error);
+                        $scope.errorMessage = "Failed to delete product: " + (error.data || "Unknown error");
+                        alert($scope.errorMessage);
+                    });
+            };
+        });
+    </script>
+
+</head>
+
+<body ng-app="productApp">
+    <div class="container" ng-controller="DeleteProductController">
+        <h2>Delete Product</h2>
+        <form ng-submit="deleteProduct()" name="productForm" novalidate>
+            <table>
+                <tr>
+                    <td>Product ID :</td>
+                    <td><input type="text" ng-model="productId" placeholder="Product ID" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="error-message">{{ errorMessage }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Delete"></td>
+                </tr>
+            </table>
+        </form>
+        <a href="product.html" class="back-button">Back</a>
+    </div>
+</body>
+
+</html>

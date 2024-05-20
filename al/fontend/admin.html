@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin: 5px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .h3-st {
+            display: block;
+            width: 1400px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .add-button {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <script>
+        var adminApp = angular.module("adminInfo", []);
+        adminApp.controller('AdminInfoCtrt', function ($scope, $http, $window) {
+            $http.get("https://localhost:44391/api/admin/getall").then(function (resp) {
+                console.log(resp.data);
+                $scope.details = resp.data;
+            }, function (err) {
+                console.error('Error fetching admin data:', err);
+            });
+
+            $scope.editAdmin = function (ad) {
+                $window.localStorage.setItem('selectedAdmin', JSON.stringify(ad));
+                $window.location.href = 'updateAdmin.html';
+            };
+
+            $scope.deleteAdmin = function (adminId) {
+                $window.location.href = 'DeleteAdmin.html';
+            };
+        });
+    </script>
+</head>
+
+<body ng-app="adminInfo">
+    <div ng-controller="AdminInfoCtrt">
+        <a href="CreateAdmin.html" class="add-button">Add New Admin</a>
+        <h3 class="h3-st">Admin Info</h3>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>User Name</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ad in details">
+                    <td>{{ ad.Id }}</td>
+                    <td>{{ ad.Name }}</td>
+                    <td>{{ ad.Username }}</td>
+                    <td>{{ ad.Password }}</td>
+                    <td>{{ ad.Email }}</td>
+                    <td>
+                        <button ng-click="editAdmin(ad)">Edit</button> |
+                        <button ng-click="deleteAdmin(ad.Id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

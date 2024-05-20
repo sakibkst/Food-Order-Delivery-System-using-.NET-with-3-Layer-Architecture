@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+    <style>
+        body {
+            color: black;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: aliceblue;
+        }
+
+        .dashboard-container {
+            background-color: lightsteelblue;
+            margin-top: 60px;
+            margin-left: 160px;
+            padding: 5px;
+            width: 200px;
+            height: 495px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 10px;
+            color: darkgreen;
+        }
+
+        .dashboard-item {
+            padding: 10px;
+            margin: 2px;
+            text-align: center;
+            background-color: white;
+            border: 3px solid green;
+            border-radius: 5px;
+        }
+
+        .dashboard-item a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+
+    <body>  
+        <div style="display:flex">
+            <div class="dashboard-container">
+                <from>
+                    <table style="width: 100%; margin: 0; padding: 0;" cellspacing="0">
+                        <tr>
+                            <td>
+                                <div class="dashboard-header">
+                                    <a>Food Ordering System</a>
+                                </div>
+                                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                                        
+                                    <li class="dashboard-item">
+                                        <a href="Admin.html">Dashboard</a>
+                                    </li>
+                                    <li class="dashboard-item">
+                                        <a href="user.html">Users</a>
+                                    </li>
+                                    <li class="dashboard-item">
+                                        <a href="user.html">Users View</a>
+                                    </li>
+                                    <li class="dashboard-item">
+                                        <a href="product.html">Add Product</a>
+                                    </li>
+                                    <li class="dashboard-item">
+                                        <a href="product.html">View Product</a>
+                                    </li>
+                                    <li class="dashboard-item">
+                                        <a href="category.html">Add Category</a>
+                                    </li>
+                                    <li class="dashboard-item">
+                                        <a href="category.html">View Category</a>
+                                    </li>
+                                    <li class="dashboard-item">
+                                        <a href="orders.html">Orders</a>
+                                    </li>
+                                    <li class="dashboard-item">
+                                        <a href="customer.html">View Customer</a>
+                                    </li>
+                                    <li class="dashboard-item">
+                                        <a /*href="../../controller/logout.php?msg=rs"*/>LogOut</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </from>
+            </div>
+        </div>
+    </body>
+
+</html>
